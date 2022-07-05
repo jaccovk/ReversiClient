@@ -1,5 +1,5 @@
 Game.Reversi = (function(){
-
+    //let counter = 0;
     let configMap = {
         spelToken: "",
         speler: [],
@@ -10,29 +10,40 @@ Game.Reversi = (function(){
     const setSpel = async function(spelToken, spelerToken) {
 
         await Game.Api.get(`getSpel`, spelToken).then(json=>{
-            console.log("getSpel", json);
+            console.log("bord ++", json.bord);
 
+            //if (json.bord !== configMap.spel.bord) {
             configMap.spel.bord = json.bord;
             configMap.spel.speler1Token = json.speler1Token;
             configMap.spel.speler2Token = json.speler2Token;
             configMap.spel.aandeBeurt = json.aandeBeurt;
-
+            //}
         });
-        console.log("het spel: ", configMap.spel);
         configMap.spelToken = spelToken;
         configMap.speler.token = spelerToken;
         configMap.speler.color = getColorFromPlayerToken(spelerToken);
         document.getElementById('spelerKleur').innerText = `Jij bent: ${configMap.speler.color}`;
-        document.getElementById('beurt').innerText = `${configMap.speler.color[configMap.spel.aandeBeurt] === 1 ? "Wit" : "Zwart"} is aan de beurt.`;
+        document.getElementById('beurt').innerText = `${configMap.spel.aandeBeurt === 1 ? "Wit" : "Zwart"} is aan de beurt.`;
         console.log("color: ", configMap.speler.color);
+
     }
 
     const privateInit = async function (spelToken, spelerToken) {
         //set the tokens
-        await setSpel(spelToken, spelerToken);
+        setInterval(async () => {
+            await setSpel(spelToken, spelerToken);
 
-        //place board
+
+            //place board
+            //if(counter === 0)
+            updateBoard();
+            //counter++;
+        }, 2000);
+    };
+
+    const updateBoard = function() {
         let bord = document.getElementsByClassName('game-board');
+        //if(bord.length !== 0)bord[0].innerHTML = "";
         for (let i = 1; i <= configMap.spel.bord.length; i++) {
             for (let j = 1; j <= configMap.spel.bord.length; j++) {
                 //set square
@@ -40,7 +51,7 @@ Game.Reversi = (function(){
                 bord[0].appendChild(square);
             }
         }
-    };
+    }
 
     const getSquare = function(i, j){
         let square = document.createElement('div');
@@ -50,11 +61,14 @@ Game.Reversi = (function(){
         $(square).click(() => {
             let kleur = configMap.speler.color === "wit" ? 1 : 2;
             if(configMap.spel.aandeBeurt === kleur) {
-                console.log("clicked square: ", i, j);
+                console.log("clicked square: ", i-1, j-1);
                 Game.Api.put('zet', configMap.spelToken, {rijZet: i-1, kolomZet: j-1, pas: false }).
                 then(json => {
-                   if(json) updateBoard(json);
+                    if(json) {
+                        console.log("zet: ", json);
+                        //counter = 0;
 
+                    }
                 });
             }
         });
@@ -70,9 +84,6 @@ Game.Reversi = (function(){
         return square;
     }
 
-    const updateBoard = function(){
-
-    }
 
     const placeFiche = function(square,color, i, j) {
         //add fiche

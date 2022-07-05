@@ -16,7 +16,7 @@ const Game = (function () {
 
     const privateInit = function(spelToken, spelerToken){
         console.log("spelToken", spelToken);
-        setInterval(_getCurrentGameState, 2000);
+        //setInterval(_getCurrentGameState, 2000);
         Game.Reversi.initReversi(spelToken, spelerToken);
         //afterInit();
         console.log("game ge-initialiseerd");
