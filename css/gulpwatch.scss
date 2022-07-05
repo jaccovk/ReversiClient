@@ -1,4 +1,4 @@
-$cell: 100px;
+$cell: 90px;
 $lengthBoard: 8;
 
 .game-board {
@@ -46,6 +46,18 @@ $lengthBoard: 8;
   animation-duration: 1s;
 }
 
+.player-turn-text{
+    color: black;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+.player-color-text{
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
 
 @keyframes turning-fiche {
   0% {

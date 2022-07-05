@@ -18,6 +18,7 @@ const Game = (function () {
         console.log("spelToken", spelToken);
         //setInterval(_getCurrentGameState, 2000);
         Game.Reversi.initReversi(spelToken, spelerToken);
+        setInterval(() => Game.Reversi.updateBoard(), 1000);
         //afterInit();
         console.log("game ge-initialiseerd");
     }

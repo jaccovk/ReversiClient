@@ -13,7 +13,7 @@ const js = function (filesJs, filesJsOrder, serverPath) {
             .pipe(dest(serverPath + '/js'))
             .pipe(babel({
                 presets: ['@babel/preset-env'],
-                plugins: ['@babel/plugin-transform-runtime',{ regenerator: true }]
+                "plugins": ['@babel/plugin-transform-runtime',{ regenerator: true }]
             }))
             //.pipe(dest('./dist/js'))
             .pipe(dest(serverPath + 'js'));
