@@ -1,0 +1,59 @@
+$cell: 100px;
+$lengthBoard: 8;
+
+.game-board {
+  display: inline-grid;
+  grid-template-columns: repeat($lengthBoard, $cell);
+  grid-template-rows: repeat($lengthBoard, $cell);
+}
+
+.square {
+  background-color: darkblue;
+  border: 1px solid #000;
+  width: $cell;
+  height: $cell;
+}
+
+.fiche-wit {
+  margin: 10%;
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  background-color: white;
+  border-radius: 50%;
+  animation-name: turning-fiche;
+  animation-duration: 1s;
+}
+
+.fiche-img {
+  width: 80%;
+  height: 80%;
+  float: left;
+  border-radius: 50%;
+  margin: 10%;
+  background: url('https://placeimg.com/640/480/nature');
+  background-size: cover;
+}
+
+.fiche-zwart {
+  margin: 10%;
+  width: 80%;
+  height: 80%;
+  text-align: center;
+  background-color: black;
+  border-radius: 50%;
+  animation-name: turning-fiche;
+  animation-duration: 1s;
+}
+
+
+@keyframes turning-fiche {
+  0% {
+    opacity: 0;
+    transform: rotate(180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
