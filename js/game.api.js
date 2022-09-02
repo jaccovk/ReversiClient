@@ -2,7 +2,6 @@ Game.Api = (function () {
 
     const apiUrl = Game.Data.configMap.apiUrl;
 
-
     const get = function (url, spelToken, params) {
 
         let completeUrl = apiUrl + url;
