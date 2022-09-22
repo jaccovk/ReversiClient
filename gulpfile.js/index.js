@@ -4,6 +4,8 @@ const js = require("./tasks/js").js(config.files.js, config.files.jsOrder, confi
 js.displayName = 'js';
 const sass = require("./tasks/sass").sass(config.localServerProjectPath, config.files.sass);
 sass.displayName = 'sass';
+const html = require('./tasks/html').html(config.localServerProjectPath);
+html.displayName = 'html';
 
 const all = function (done) {
     exports.js();
@@ -16,10 +18,12 @@ const watchFiles = () => {
     console.log("watching files ....");
     gulp.watch(['./js/**/*.js'], gulp.series(js));
     gulp.watch(['./css/**/*.scss'], gulp.series(sass));
+    gulp.watch(['./index.html'], gulp.series(html));
     console.log("done");
 };
 
 exports.default = all;
 exports.js = js;
 exports.sass = sass;
+exports.html = html;
 exports.watch = watchFiles

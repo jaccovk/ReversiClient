@@ -16,6 +16,9 @@ module.exports = {
         sass: [
             'css/*.scss',
         ],
+        html: [
+            'index.html',
+        ],
     },
     voornaam: 'Jacco'
 };

@@ -133,22 +133,16 @@ Game.Reversi = (function(){
             setSpel();
             //check if the game is over
             isAfgelopen(json.bord);
-        });
+        }).catch(() => calculatePoints_AndEndGame());
     }
 
 
     const isAfgelopen = function (bord) {
         //get a true or false from the api
-        debugger;
         Game.Api.get(`isAfgelopen`, configMap.spelToken).then(async json => {
                 if (json) {
                     //show alert who won by counting the count of stones
-                    await alert(`${countFichesByColor("Wit", bord) > countFichesByColor("Zwart", bord) ? "Wit" : "Zwart"} heeft gewonnen!`);
-                    window.location.replace("https://localhost:5001/");
-                    configMap.afgelopen = true;
-                    configMap.spelToken = "";
-                    configMap.speler = [];
-                    configMap.spel = [];
+                    await calculatePoints_AndEndGame();
                 } else {
                     //check if one of the colors is 0
                     if (countFichesByColor("Wit", bord) === 0 || countFichesByColor("Zwart", bord) === 0) {
@@ -175,6 +169,15 @@ Game.Reversi = (function(){
             }
         }
         return color === "Wit" ? wit : zwart;
+    }
+
+    async function calculatePoints_AndEndGame(){
+        await alert(`${countFichesByColor("Wit", bord) > countFichesByColor("Zwart", bord) ? "Wit" : "Zwart"} heeft gewonnen!`);
+        window.location.replace("https://localhost:5001/");
+        configMap.afgelopen = true;
+        configMap.spelToken = "";
+        configMap.speler = [];
+        configMap.spel = [];
     }
 
     return {
