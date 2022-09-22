@@ -16,7 +16,10 @@
     "@types/gulp-babel": "^6.1.30",
     "chart.js": "^3.7.1",
     "gulp-concat": "^2.6.1",
-    "gulp-order": "^1.2.0"
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-order": "^1.2.0",
+    "gulp-wrap": "^0.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
