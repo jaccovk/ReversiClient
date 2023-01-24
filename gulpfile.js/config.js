@@ -21,7 +21,14 @@ module.exports = {
         ],
         vendor: [
             'vendor/*.js'
-        ]
+        ],
+        templateFiles: [
+            'templates/**/[^_]*.hbs',
+        ],
+        partials: [
+          'templates/**/_*.hbs',
+            'templates/_*.hbs',
+        ],
     },
     voornaam: 'Jacco'
 };

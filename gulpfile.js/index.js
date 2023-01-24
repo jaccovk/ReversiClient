@@ -8,6 +8,8 @@ const html = require('./tasks/html').html(config.localServerProjectPath);
 html.displayName = 'html';
 const vendor = require("./tasks/vendor").vendor(config.files.vendor, config.localServerProjectPath);
 vendor.displayName = 'vendor';
+const templates = require("./tasks/templates").templates(config.files.templateFiles, config.localServerProjectPath);
+templates.displayName = 'templates';
 
 const all = function (done) {
     exports.js();
