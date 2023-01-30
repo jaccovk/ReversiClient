@@ -25,8 +25,8 @@ module.exports = {
         templateFiles: [
             'templates/**/[^_]*.hbs',
         ],
-        partials: [
-          'templates/**/_*.hbs',
+        partialFiles: [
+            'templates/**/_*.hbs',
             'templates/_*.hbs',
         ],
     },

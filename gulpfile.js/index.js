@@ -8,7 +8,7 @@ const html = require('./tasks/html').html(config.localServerProjectPath);
 html.displayName = 'html';
 const vendor = require("./tasks/vendor").vendor(config.files.vendor, config.localServerProjectPath);
 vendor.displayName = 'vendor';
-const templates = require("./tasks/templates").templates(config.files.templateFiles, config.localServerProjectPath);
+const templates = require("./tasks/templates").templates(config.files.templateFiles, config.localServerProjectPath, config.files.partialFiles);
 templates.displayName = 'templates';
 
 const all = function (done) {
@@ -25,6 +25,7 @@ const watchFiles = () => {
     gulp.watch(['./js/**/*.js'], gulp.series(js));
     gulp.watch(['./css/**/*.scss'], gulp.series(sass));
     gulp.watch(['./index.html'], gulp.series(html));
+    gulp.watch(['./templates/**/*.hbs'], gulp.series(templates));
     gulp.watch(['./vendor/*.js'], gulp.series(vendor));
     console.log("done");
 };
@@ -33,6 +34,7 @@ exports.default = all;
 exports.js = js;
 exports.sass = sass;
 exports.html = html;
+exports.templates = templates;
 exports.vendor = vendor;
 exports.watch = watchFiles;
 
