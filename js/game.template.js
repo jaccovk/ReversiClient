@@ -2,8 +2,8 @@ Game.Template = (function () {
     const getTemplate = function (templateName) {
         let template = spa_templates.templates;
         const templateParts = templateName.split('.');
-        for (let i = 0; i < templateParts.length; i++) {
-            template = template[templateParts[i]];
+        for (let templatePart of templateParts) {
+            template = template[templatePart];
         }
         return template;
     }
@@ -12,7 +12,6 @@ Game.Template = (function () {
         return getTemplate(templateName)(data);
     }
     return {
-        parseTemplate,
-        getTemplate
+        parseTemplate: parseTemplate
     }
 })();

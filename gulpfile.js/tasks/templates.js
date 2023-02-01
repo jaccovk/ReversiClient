@@ -19,8 +19,8 @@ const templates = function (templateFiles, serverProjectPath, partialFiles) {
                     return declare.processNameByPath(filePath.replace('<parent_map>/templates/', ''));
                 }
             }))
-            .pipe(concat('templates.js'))
-            .pipe(dest('./dist/js/'));
+/*            .pipe(concat('templates.js'))
+            .pipe(dest('./dist/js/'));*/
 
         const partials = src(partialFiles, {allowEmpty: true})
             .pipe(handlebars())

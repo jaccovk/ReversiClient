@@ -21,6 +21,7 @@
     <!-- Font Awesomeness -->
     <script type="text/javascript" src="js/feedbackWidget.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
+    <script src="js/game.template.js"></script>
     <script type="text/javascript" src="js/game.data.js"></script>
     <script type="text/javascript" src="js/game.model.js"></script>
     <script type="text/javascript" src="js/game.reversi.js"></script>
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="css/gulpwatch.scss">
     <script src="dist/js/vendor.js"></script>
     <script src="dist/js/templates.js"></script>
+
     <!--            <script src="gulpfile.js/js/feedbackWidget.js">
             </script>
             <script src="gulpfile.js/js/game.js">
@@ -66,7 +68,9 @@
 </aside>
 
 <!-- Reversi bord -->
-<div class="game-board">
+<!--<div class="game-board">-->
+<div style="background: yellow; width: 100px; height: 100px;" id="vierkant">
+
 </div>
 <script>
     $(document).ready(function () {
