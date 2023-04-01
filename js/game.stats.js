@@ -3,11 +3,15 @@ Game.Stats = (function () {
         stats: {
             aantalWit: 0,
             aantalZwart: 0,
+            witIsWinning: false,
+            aantalLegeVelden: 0,
         }
     }
     const getStats = function (bord) {
         configMap.stats.aantalWit = countFichesByColor("Wit", bord);
         configMap.stats.aantalZwart = countFichesByColor("Zwart", bord);
+        configMap.stats.aantalLegeVelden = (bord.length * bord.length) - configMap.stats.aantalWit - configMap.stats.aantalZwart;
+        configMap.stats.witIsWinning = configMap.stats.aantalWit > configMap.stats.aantalZwart;
         return configMap.stats;
     }
 

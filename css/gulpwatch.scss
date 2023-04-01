@@ -7,9 +7,21 @@ $lengthBoard: 8;
   grid-template-rows: repeat($lengthBoard, $cell);
 }
 
-.game-bg{
+.game-bg {
   background-color: #f2f2f2;
-    border-radius: 10px;
+  margin: 2em;
+  border-radius: 10px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.game-stats {
+  text-align: center;
+  margin: 2em;
+  border-radius: 10px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1.2em;
 }
 
 .cat-facts {

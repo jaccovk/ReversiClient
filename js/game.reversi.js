@@ -34,6 +34,9 @@ Game.Reversi = (function(){
 
             //set chart
             setChart();
+
+            //set stats
+            setStats();
         }
     };
 
@@ -41,6 +44,18 @@ Game.Reversi = (function(){
         let catFacts = await Game.Api.getCatFacts();
         console.log(catFacts.data[0]);
         document.getElementsByClassName('cat-facts')[0].innerText = catFacts.data[0];
+    }
+
+    const setStats = function () {
+        const gameStats = document.getElementsByClassName('game-stats')[0];
+        const stats = Game.Stats.getStats(configMap.spel.bord);
+        setInterval(() => {
+            gameStats.innerHTML = `
+            <hr/>
+                ${stats.witIsWinning ? "Wit" : "Zwart"}  is aan het winnen.<hr/>
+                Er zijn nog ${stats.aantalLegeVelden} lege velden.
+            <hr/>`;
+        }, 1000);
     }
 
     const setChart = function () {
