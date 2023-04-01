@@ -15,9 +15,9 @@ Game.Buttons = (function () {
         );
         buttons.appendChild(pas);
 
-        /** ------ Verander de image --------- **/
+        /** ------ Verander de catfact --------- **/
         let image = document.createElement('button');
-        image.innerHTML = "Verander van image";
+        image.innerHTML = "Verander van catfact";
         $(image).addClass('btn btn-outline-info');
         image.addEventListener('click', () => {
             window.location.reload();

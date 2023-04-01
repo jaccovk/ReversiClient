@@ -2,6 +2,11 @@ Game.Api = (function () {
 
     const apiUrl = Game.Data.configMap.apiUrl;
 
+    const getCatFacts = function () {
+        return fetch('https://meowfacts.herokuapp.com/')
+            .then(res => res.json());
+    }
+
     const get = function (url, spelToken, params) {
 
         let completeUrl = apiUrl + url;
@@ -34,5 +39,6 @@ Game.Api = (function () {
     return {
         get: get,
         put: put,
+        getCatFacts: getCatFacts
     }
 })();

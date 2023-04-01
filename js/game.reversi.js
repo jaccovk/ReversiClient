@@ -8,6 +8,10 @@ Game.Reversi = (function(){
         colors: ["geen", "wit", "zwart"],
     };
 
+    const countFichesByColor = (color, bord) => {
+        return Game.Stats.countFichesByColor(color, bord);
+    }
+
 
     const privateInit = async function (spelToken, spelerToken) {
         if (!configMap.afgelopen) {
@@ -24,8 +28,33 @@ Game.Reversi = (function(){
                     bord[0].appendChild(square);
                 }
             }
+
+            //set cat facts
+            setCatFacts();
+
+            //set chart
+            setChart();
         }
     };
+
+    const setCatFacts = async function () {
+        let catFacts = await Game.Api.getCatFacts();
+        console.log(catFacts.data[0]);
+        document.getElementsByClassName('cat-facts')[0].innerText = catFacts.data[0];
+    }
+
+    const setChart = function () {
+        const ctx = document.getElementById('myChart');
+        const stats = Game.Stats.getStats(configMap.spel.bord);
+        let chart = Game.Stats.getChart(ctx);
+
+        setInterval(() => {
+            let aantalWit = stats.aantalWit;
+            let aantalZwart = stats.aantalZwart;
+            chart.data.datasets[0].data = [aantalWit, aantalZwart];
+            chart.update();
+        }, 1000);
+    }
 
 
     const setSpel = async function () {
@@ -42,9 +71,6 @@ Game.Reversi = (function(){
         document.getElementById('beurt').innerText = `${configMap.spel.aandeBeurt === 1 ? "Wit" : "Zwart"} is aan de beurt.`;
 
     }
-
-
-
 
     const setSquare = function (i, j) {
         let square = document.createElement('div');
@@ -154,21 +180,6 @@ Game.Reversi = (function(){
                 }
             }
         );
-    }
-
-    const countFichesByColor = (color, bord) => {
-        let wit = 0;
-        let zwart = 0;
-        for (let i = 0; i < bord.length; i++) {
-            for (let j = 0; j < bord.length; j++) {
-                if (bord[i][j] === 1) {
-                    wit++;
-                } else if (bord[i][j] === 2) {
-                    zwart++;
-                }
-            }
-        }
-        return color === "Wit" ? wit : zwart;
     }
 
     async function calculatePoints_AndEndGame(bord){

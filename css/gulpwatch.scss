@@ -7,6 +7,31 @@ $lengthBoard: 8;
   grid-template-rows: repeat($lengthBoard, $cell);
 }
 
+.game-bg{
+  background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+.cat-facts {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.typed {
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 0;
+  animation: typing;
+  animation-duration: 1.5s;
+  animation-timing-function: steps(30, end);
+  animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
 .square {
   background-color: darkblue;
   border: 1px solid #000;
