@@ -1,23 +1,20 @@
 Game.Data = (function(){
-    //communicatie met server
-    const configMap = {
-        mock: [
-            {
-                url: `api/Spel/Beurt`, //api/spel/beurt
-                data: 0
-            }
-        ],
-
-                apiUrl: "https://localhost:44326/api/spel/"
-
-
-
-    }
     let stateMap = {
         environment : 'development',
+        isProduction : environment === 'production',
         gameState : 0
     }
-    const getMockData = function(){
+    const configMap = {
+        apiUrl: isProduction ? "/api/spel/" : "http://localhost:5001/api/spel/",
+        /*        mock: [
+            {
+                url: `api/Spel/Beurt`,
+                data: 0
+            }
+        ],*/
+    }
+
+/*    const getMockData = function(){
 
         const mockData = configMap.mock;
 
@@ -25,9 +22,9 @@ Game.Data = (function(){
             resolve(mockData);
         });
 
-    }
+    }*/
 
-    const get = function(url){
+/*    const get = function(url){
         if(stateMap.environment === 'development')
             return getMockData(configMap.mock.url);
         else {
@@ -39,9 +36,9 @@ Game.Data = (function(){
                     console.log(e.message);
                 });
         }
-    };
+    };*/
 
-    const publicInit = function(environment){
+/*    const publicInit = function(environment){
         //Game.init();
         console.log('init game data ...');
         if(environment === "production" || environment === "development") {
@@ -49,11 +46,11 @@ Game.Data = (function(){
             //get(url);
         }
         else throw new Error("verkeerde environment");
-    }
+    }*/
 
     return {
-        initData: publicInit,
-        get: get,
+/*      initData: publicInit,
+        get: get,*/
         stateMap: stateMap,
         configMap: configMap
     }

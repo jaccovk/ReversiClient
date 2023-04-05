@@ -49,13 +49,12 @@ Game.Reversi = (function(){
     const setStats = function () {
         const gameStats = document.getElementsByClassName('game-stats')[0];
         const stats = Game.Stats.getStats(configMap.spel.bord);
-        setInterval(() => {
-            gameStats.innerHTML = `
+        gameStats.innerHTML = `
             <hr/>
                 ${stats.witIsWinning ? "Wit" : "Zwart"}  is aan het winnen.<hr/>
                 Er zijn nog ${stats.aantalLegeVelden} lege velden.
-            <hr/>`;
-        }, 1000);
+            <hr/>
+        `;
     }
 
     const setChart = function () {
@@ -63,17 +62,14 @@ Game.Reversi = (function(){
         const stats = Game.Stats.getStats(configMap.spel.bord);
         let chart = Game.Stats.getChart(ctx);
 
-        setInterval(() => {
-            let aantalWit = stats.aantalWit;
-            let aantalZwart = stats.aantalZwart;
-            chart.data.datasets[0].data = [aantalWit, aantalZwart];
-            chart.update();
-        }, 1000);
+        let aantalWit = stats.aantalWit;
+        let aantalZwart = stats.aantalZwart;
+        chart.data.datasets[0].data = [aantalWit, aantalZwart];
+        chart.update();
     }
 
 
     const setSpel = async function () {
-
         await Game.Api.get(`getSpel`, configMap.spelToken).then(json => {
 
             configMap.spel.bord = json.bord;
@@ -84,7 +80,6 @@ Game.Reversi = (function(){
         configMap.speler.color = getColorFromPlayerToken(configMap.speler.token);
         document.getElementById('spelerKleur').innerText = `Jij bent: ${configMap.speler.color}`;
         document.getElementById('beurt').innerText = `${configMap.spel.aandeBeurt === 1 ? "Wit" : "Zwart"} is aan de beurt.`;
-
     }
 
     const setSquare = function (i, j) {
@@ -172,6 +167,13 @@ Game.Reversi = (function(){
             }
             //update the boarddata
             setSpel();
+
+            //update the stats
+            setStats();
+
+            //update the chart
+            setChart();
+
             //check if the game is over
             isAfgelopen(json.bord);
         }).catch(() => calculatePoints_AndEndGame(configMap.spel.bord));
@@ -197,9 +199,9 @@ Game.Reversi = (function(){
         );
     }
 
-    async function calculatePoints_AndEndGame(bord){
+    async function calculatePoints_AndEndGame(bord) {
         await alert(`${countFichesByColor("Wit", bord) > countFichesByColor("Zwart", bord) ? "Wit" : "Zwart"} heeft gewonnen!`);
-        window.location.replace("https://localhost:5001/");
+        window.location.href = "/"; //TODO
         configMap.afgelopen = true;
         configMap.spelToken = "";
         configMap.speler = [];
